@@ -34,7 +34,7 @@ you can add middleware ```captcha``` to your routes or controllers, the second w
 ```sh
 if(!app('captcha')->isValid($request->captcha))
 {
-    return back()->withError('Wrong Captcha');
+    return back()->withErrors('Wrong Captcha');
 }
 ```
 ## Language Key
