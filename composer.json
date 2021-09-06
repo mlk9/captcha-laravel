@@ -1,0 +1,27 @@
+{
+    "name": "mlk9/captcha-laravel",
+    "description": "image captcha for Laravel 6+",
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mohammad Maleki",
+            "email": "malekii24@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mlk9\\Captcha\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mlk9\\Captcha\\CaptchaServiceProvider"
+            ]
+        }
+    }
+}
