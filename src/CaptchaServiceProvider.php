@@ -17,6 +17,7 @@ class CaptchaServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/captcha.php', 'captcha');
         $this->app->singleton('captcha', function ($app) {
             return new Captcha();
         });
