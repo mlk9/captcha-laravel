@@ -1,5 +1,7 @@
 # Captcha Laravel
 image captcha for Laravel 6+
+- works with session
+- generates image your custom
 # Installation
 ```sh
 composer require mlk9/captcha-laravel
@@ -9,6 +11,12 @@ vendor public
 php artisan vendor:publish --tag=captcha-laravel
 ```
 # Documents
+## Configure
+- backgrounds (array)
+- char (string) 
+- count (int)
+- font (string)
+- char_colors (array [r,g,b])
 ## Generate captcha
 you can use component:
 ```sh
@@ -23,7 +31,7 @@ or create custom like this:
             <img src="{{ app('captcha')->generate() }}" alt="captha"> 
         </div>
 		<div>
-			<div>{{ __('Captcha') }}</div>
+			<div>{{ __('captcha.captcha') }}</div>
 			<input id="captcha" name="captcha" type="text" required autocomplete="off">
 		</div>
 	</div>
@@ -38,6 +46,6 @@ if(!app('captcha')->isValid($request->captcha))
 }
 ```
 ## Language Key
-- `Captcha`
-- `Please_enter_captcha`
-- `Wrong_captcha`
+- `captcha.captcha`
+- `captcha.please_enter_captcha`
+- `captcha.wrong_captcha`
