@@ -19,11 +19,11 @@ class CaptchaMiddleware
     {
         if(!isset($request->captcha))
         {
-            return back()->withErrors(__('Please_enter_captcha'));
+            return back()->withErrors(__('captcha.please_enter_captcha'));
         }
         if(md5($request->captcha)!=Session::get('captcha-hex'))
         {
-            return back()->withErrors(__('Wrong_captcha'));
+            return back()->withErrors(__('captcha.wrong_captcha'));
         }
 
         return $next($request);

@@ -4,7 +4,7 @@
             <img src="{{ app('captcha')->generate() }}" alt="captha">
         </div>
 		<div class="flex-1 p-4">
-			<div class="text-sm">{{ __('Captcha') }}</div>
+			<div class="text-sm">{{ __('captcha.captcha') }}</div>
 			<input id="captcha" name="captcha" type="text" required autocomplete="off" class="p-2 h-8 appearance-none relative block w-full py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm">
 		</div>
 	</div>

@@ -40,6 +40,7 @@ class CaptchaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/captcha'),
             __DIR__.'/../resources/fonts' => public_path('vendor/captcha/fonts'),
+            __DIR__.'/../resources/lang' => resource_path('lang'),
         ], 'captcha-laravel');
     }
 
