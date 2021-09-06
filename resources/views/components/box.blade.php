@@ -1,7 +1,7 @@
 <div {{ $attributes }}>
     <div class="flex flex-wrap items-center">
         <div class="flex-1 border-gray-400 border-2 rounded">
-            <img src="{{ app('captcha')->generate() }}" alt="captha">
+            <img class="w-full" src="{{ app('captcha')->generate() }}" alt="captha">
         </div>
 		<div class="flex-1 p-4">
 			<div class="text-sm">{{ __('captcha.captcha') }}</div>

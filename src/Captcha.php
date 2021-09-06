@@ -19,12 +19,12 @@ class Captcha
         $captcha_num = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
         $captcha_num = substr(str_shuffle($captcha_num), 0, $count);
         Session::put('captcha-hex', md5($captcha_num));
-        $image = ImageCreateFromPNG($backgorunds[rand(0, count($backgorunds))]);
-        $image =imagecrop($image, ['width'=>36*$count,'height'=>60,'x'=>0,'y'=>0]);
+        $image = ImageCreateFromPNG($backgorunds[rand(0, count($backgorunds)-1)]);
+        $image =imagecrop($image, ['width'=>33.333*$count,'height'=>60,'x'=>0,'y'=>0]);
         imagecolorallocate($image, 255, 255, 255); // set background color
         $font = config('captcha.font', public_path('vendor/captcha/fonts/tahoma.ttf'));
         for ($i=1;$i<$count+1;$i++) {
-            $color = $colors[rand(0, count($colors))];
+            $color = $colors[rand(0, count($colors)-1)];
             $text_color = imagecolorallocate($image, $color[0], $color[1], $color[2]); // set captcha text color
             $char = substr($captcha_num, $i-1, 1);
             imagettftext($image, rand(16, 22), rand(0, 30), $i*30, 40, $text_color, $font, $char);
