@@ -16,7 +16,9 @@ php artisan vendor:publish --tag=captcha-laravel
 - char (string) 
 - count (int)
 - font (string)
-- char_colors (array [r,g,b])
+- colors (array [r,g,b])
+- width (int)
+- height (int)
 ## Generate captcha
 you can use component:
 ```sh
