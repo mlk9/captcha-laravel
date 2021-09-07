@@ -31,5 +31,10 @@ return [
         [0,176,24],
         [0,43,198],
     ],
+     /**
+     * size from resize
+     */
+    'width' => 6,
+    'height' => 6,
 
 ];
