@@ -34,7 +34,7 @@ return [
      /**
      * size from resize
      */
-    'width' => 6,
-    'height' => 6,
+    'width' => 200,
+    'height' => 40,
 
 ];
