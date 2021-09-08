@@ -3,10 +3,11 @@ image captcha for Laravel 6+
 - works with session
 - generates image your custom
 # Installation
+you can install this package via composer
 ```sh
 composer require mlk9/captcha-laravel
 ```
-vendor public
+then publish vendor
 ```sh
 php artisan vendor:publish --tag=captcha-laravel
 ```
@@ -40,7 +41,18 @@ or create custom like this:
 </div>
 ```
 ## Validation
-you can add middleware ```captcha``` to your routes or controllers, the second way use ```isValid(string: entry)``` from ```app('captcha')``` for example :
+You can use `captch` rule in your validations
+
+```php
+Illuminate\Support\Facades\Validator::validate($request->all(),
+    ["captchaField"=>"captcha"]
+);
+```
+
+#### also
+you can add middleware ```captcha``` to your routes or controllers
+
+and the third way use ```isValid(string: entry)``` from ```app('captcha')``` for example :
 ```sh
 if(!app('captcha')->isValid($request->captcha))
 {

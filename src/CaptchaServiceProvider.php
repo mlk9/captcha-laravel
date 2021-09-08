@@ -3,9 +3,9 @@
 namespace Mlk9\Captcha;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Mlk9\Captcha\Captcha;
 use Mlk9\Captcha\Http\Middleware\CaptchaMiddleware;
 
 class CaptchaServiceProvider extends ServiceProvider
@@ -44,6 +44,7 @@ class CaptchaServiceProvider extends ServiceProvider
             __DIR__.'/../resources/fonts' => public_path('vendor/captcha/fonts'),
             __DIR__.'/../resources/lang' => resource_path('lang'),
         ], 'captcha-laravel');
+        $this->ExtendValidation();
     }
 
     /**
@@ -67,5 +68,16 @@ class CaptchaServiceProvider extends ServiceProvider
     protected function registerComponent(string $component)
     {
         Blade::component('captcha::components.'.$component, 'captcha-'.$component);
+    }
+
+    /**
+     * Add Captcha validation rule
+     * @return void
+     */
+    protected function ExtendValidation(): void
+    {
+        Validator::extend("captcha",function ($attr,$value){
+            return app("captcha")->isValid($value);
+        },__('captcha.wrong_captcha'));
     }
 }

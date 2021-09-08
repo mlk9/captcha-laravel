@@ -21,7 +21,7 @@ class CaptchaMiddleware
         {
             return back()->withErrors(__('captcha.please_enter_captcha'));
         }
-        if(md5($request->captcha)!=Session::get('captcha-hex'))
+        if(hash("sha256",$request->captcha)!=Session::get('captcha-hex'))
         {
             return back()->withErrors(__('captcha.wrong_captcha'));
         }
