@@ -41,7 +41,7 @@ or create custom like this:
 </div>
 ```
 ## Validation
-You can use `captch` rule in your validations
+You can use `captcha` rule in your validations
 
 ```php
 Illuminate\Support\Facades\Validator::validate($request->all(),
