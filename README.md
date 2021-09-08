@@ -15,7 +15,7 @@ php artisan vendor:publish --tag=captcha-laravel
 ## Configure
 - backgrounds (array)
 - char (string) 
-- count (int)
+- length (int)
 - font (string)
 - colors (array [r,g,b])
 - width (int)
@@ -59,6 +59,15 @@ if(!app('captcha')->isValid($request->captcha))
     return back()->withErrors('Wrong Captcha');
 }
 ```
+## Refresh captcha (this is idea for you)
+#### Method 1 (JS-Jquery)
+- Create route (Get method) and return `app('captcha')->generate()`
+- Make button (`id:refresh_captcha`)
+- with Jquery or any send request to the route and return response in `#captcha` image like this `<img src="%res%">` 
+#### Method 2 (VueJs)
+- please see vuejs docs
+#### Method 3 (Livewire)
+- please see livewire docs
 ## Language Key
 - `captcha.captcha`
 - `captcha.please_enter_captcha`
