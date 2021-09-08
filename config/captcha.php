@@ -10,9 +10,9 @@ return [
      */
     'char' => '1234567890abcdefghijklmnopqrstuvwxyz',
     /**
-     * count chart print
+     * length char print
      */
-    'count' => 6,
+    'length' => 6,
     /**
      * font
      */

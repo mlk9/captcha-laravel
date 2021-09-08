@@ -19,25 +19,36 @@ class Captcha
      */
     public function generate()
     {
-        $count = config('captcha.count', 6);
+        /* get length chars */
+        $length = config('captcha.length', 6); 
+        /* get colors */
         $colors = config('captcha.colors', [[90,90,90]]);
+        /* get backgrounds */
         $backgorunds = array_merge($this->backgrounds,config("captcha.backgrounds",[]));
-        $captcha_num = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
-        $captcha_num = substr(str_shuffle($captcha_num), 0, $count);
-        Session::put('captcha-hex', hash("sha256",$captcha_num));
+        /* get char */
+        $captcha = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
+        /* select random */
+        $captcha = substr(str_shuffle($captcha), 0, $length);
+        /* put captcha to session hashed */
+        // Session::put('captcha-hex', hash("md5",$captcha));   //md5
+        Session::put('captcha-hex', hash("sha256",$captcha));   //sha256 
+        /* select background */
         $image = ImageCreateFromPNG(Arr::random($backgorunds));
-        $image =imagecrop($image, ['width'=>33.333*$count,'height'=>60,'x'=>0,'y'=>0]);
+        /* conevrt to good captcha */
+        $image =imagecrop($image, ['width'=>33.333*$length,'height'=>60,'x'=>0,'y'=>0]);
         imagecolorallocate($image, 255, 255, 255); // set background color
         $font = config('captcha.font', public_path('vendor/captcha/fonts/tahoma.ttf'));
-        for ($i=1;$i<$count+1;$i++) {
-            $color = $colors[rand(0, count($colors)-1)];
-            $text_color = imagecolorallocate($image, $color[0], $color[1], $color[2]); // set captcha text color
-            $char = substr($captcha_num, $i-1, 1);
+        for ($i=1;$i<$length+1;$i++) {
+            $color =  Arr::random($colors);
+            $text_color = imagecolorallocate($image, $color[0], $color[1], $color[2]);
+            $char = substr($captcha, $i-1, 1);
             imagettftext($image, rand(16, 22), rand(0, 30), $i*30, 40, $text_color, $font, $char);
         }
         ob_start();
+        /* resize to custom size */
         $imgResized = imagescale($image , config('captcha.width', 200), config('captcha.height', 40));
         ImagePng($imgResized);
+        /* export to png base 64 */
         return "data:image/png;base64,".base64_encode(ob_get_clean());
     }
 
@@ -49,6 +60,7 @@ class Captcha
      */
     public function isValid($captcha)
     {
+        /* check cpatcha */
         if (hash("sha256",$captcha)==Session::get('captcha-hex')) {
             return true;
         }

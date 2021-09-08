@@ -17,11 +17,13 @@ class CaptchaMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        /* check captcha isset */
         if(!isset($request->captcha))
         {
             return back()->withErrors(__('captcha.please_enter_captcha'));
         }
-        if(hash("sha256",$request->captcha)!=Session::get('captcha-hex'))
+        /*  is valid or not */
+        if(app('captcha')->isValid($request->captcha))
         {
             return back()->withErrors(__('captcha.wrong_captcha'));
         }
