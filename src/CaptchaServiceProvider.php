@@ -78,6 +78,6 @@ class CaptchaServiceProvider extends ServiceProvider
     {
         Validator::extend("captcha",function ($attr,$value){
             return app("captcha")->isValid($value);
-        },"Please Confirm the Captcha");
+        },__('captcha.wrong_captcha'));
     }
 }
