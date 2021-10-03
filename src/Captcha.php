@@ -37,7 +37,8 @@ class Captcha
         /* conevrt to good captcha */
         $image =imagecrop($image, ['width'=>33.333*$length,'height'=>60,'x'=>0,'y'=>0]);
         imagecolorallocate($image, 255, 255, 255); // set background color
-        $font = config('captcha.font', public_path('vendor/captcha/fonts/tahoma.ttf'));
+        putenv('GDFONTPATH=' . realpath('.')); //fix bug
+        $font = config('captcha.font', 'vendor/captcha/fonts/tahoma');
         for ($i=1;$i<$length+1;$i++) {
             $color =  Arr::random($colors);
             $text_color = imagecolorallocate($image, $color[0], $color[1], $color[2]);
