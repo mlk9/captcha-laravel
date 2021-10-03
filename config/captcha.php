@@ -16,7 +16,7 @@ return [
     /**
      * font
      */
-    'font' => public_path('vendor/captcha/fonts/tahoma.ttf'),
+    'font' => 'vendor/captcha/fonts/tahoma', //without .ttf
     /**
      * colors
      */
