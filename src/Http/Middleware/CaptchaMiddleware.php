@@ -23,7 +23,7 @@ class CaptchaMiddleware
             return back()->withErrors(__('captcha.please_enter_captcha'));
         }
         /*  is valid or not */
-        if(app('captcha')->isValid($request->captcha))
+        if(!app('captcha')->isValid($request->captcha))
         {
             return back()->withErrors(__('captcha.wrong_captcha'));
         }
