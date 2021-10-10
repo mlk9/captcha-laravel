@@ -12,6 +12,9 @@ then publish vendor
 php artisan vendor:publish --tag=captcha-laravel
 ```
 # Documents
+## Notice
+if you get error for font you can replace in config
+`'font' => public_path('vendor/captcha/fonts/tahoma.ttf'),`
 ## Configure
 - backgrounds (array)
 - char (string) 
