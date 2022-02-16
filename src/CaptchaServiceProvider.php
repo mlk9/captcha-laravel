@@ -42,7 +42,7 @@ class CaptchaServiceProvider extends ServiceProvider
             __DIR__.'/../config/captcha.php' => config_path('captcha.php'),
             __DIR__.'/../resources/views' => resource_path('views/vendor/captcha'),
             __DIR__.'/../resources/fonts' => public_path('vendor/captcha/fonts'),
-            __DIR__.'/../resources/lang' => resource_path('lang'),
+            __DIR__.'/../lang' => base_path('lang'), // Update to laravel 9
         ], 'captcha-laravel');
         $this->ExtendValidation();
     }
