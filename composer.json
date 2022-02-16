@@ -1,6 +1,6 @@
 {
     "name": "mlk9/captcha-laravel",
-    "description": "image captcha for Laravel 6+",
+    "description": "image captcha for Laravel 9+",
     "license": "MIT",
     "type": "project",
     "authors": [

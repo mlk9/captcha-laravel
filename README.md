@@ -1,5 +1,5 @@
 # Captcha Laravel
-image captcha for Laravel 6+
+image captcha for Laravel 9+
 - works with session
 - generates image your custom
 # Installation
