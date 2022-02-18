@@ -38,11 +38,12 @@ class CaptchaServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'captcha');
         $this->configureComponents();
+        $langDir = 
         $this->publishes([
             __DIR__.'/../config/captcha.php' => config_path('captcha.php'),
             __DIR__.'/../resources/views' => resource_path('views/vendor/captcha'),
             __DIR__.'/../resources/fonts' => public_path('vendor/captcha/fonts'),
-            __DIR__.'/../lang' => base_path('lang'), // Update to laravel 9
+            __DIR__.'/../lang' => is_dir(resource_path('lang')) ? resource_path('lang') : base_path('lang'),   
         ], 'captcha-laravel');
         $this->ExtendValidation();
     }
