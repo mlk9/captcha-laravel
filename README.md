@@ -2,7 +2,10 @@
 image captcha for Laravel
 - works with session
 - generates image your custom
-## *** For Laravel 6/7/8 install version 1.1.5 ***
+
+Persian Docs :
+https://vrgl.ir/WQXCT
+
 # Installation
 you can install this package via composer
 ```sh
