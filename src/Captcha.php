@@ -19,6 +19,11 @@ class Captcha
      */
     public function generate()
     {
+        /* check gd extention enabled */
+        if(extension_loaded('gd') === false)
+        {
+            throw new Exception('Please enable GD extention in PHP.');
+        }
         /* get length chars */
         $length = config('captcha.length', 6); 
         /* get colors */
