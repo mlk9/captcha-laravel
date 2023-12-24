@@ -21,6 +21,6 @@
 
 <script>
 	document.querySelector('#refresh-captcha').addEventListener('click', e => {
-		document.querySelector('#captcha-image').src = '{{ route('captcha.image') }}';
+		document.querySelector('#captcha-image').src = '{{ route('captcha.image') }}?q='+new Date().getTime();
 	})
 </script>

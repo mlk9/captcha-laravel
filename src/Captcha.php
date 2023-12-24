@@ -56,7 +56,7 @@ class Captcha
         /* get colors */
         $colors = config('captcha.colors', $this->defaultColors);
         /* get backgrounds */
-        $backgorunds = array_merge($this->defaultBackgrounds, config("captcha.backgrounds", []));
+        $backgorunds = count(config("captcha.backgrounds", $this->defaultBackgrounds)) === 0 ? $this->defaultBackgrounds : config("captcha.backgrounds", $this->defaultBackgrounds);
         /* get char */
         $captcha = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
         /* select random */
