@@ -15,6 +15,7 @@ class CaptchaController extends Controller
     public function image()
     {
         $captcha = Captcha::generate()->image;
-        return response(base64_decode($captcha),200,['Content-Type' => 'image/png']);
+        $splited = explode(',', substr( $captcha , 5 ) , 2);
+        return response(base64_decode($splited[1]),200,['Content-Type' => 'image/png']);
     }
 }
