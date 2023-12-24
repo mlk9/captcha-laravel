@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Mlk9\Captcha\Facades\Captcha as CaptchaFacade;
 use Mlk9\Captcha\Http\Middleware\CaptchaMiddleware;
 
 class CaptchaServiceProvider extends ServiceProvider
@@ -18,9 +19,7 @@ class CaptchaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/captcha.php', 'captcha');
-        $this->app->singleton('captcha', function ($app) {
-            return new Captcha();
-        });
+        $this->app->singleton(CaptchaFacade::class, Captcha::class);
         app('router')->aliasMiddleware('captcha', CaptchaMiddleware::class);
     }
 

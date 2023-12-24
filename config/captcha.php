@@ -2,7 +2,13 @@
 
 return [
     /**
-     * add additional backgrounds just png files url or base64
+     * add additional backgrounds : 
+     * - Path in filesystem
+     * - File Pointer resource
+     * - SplFileInfo object
+     * - Raw binary image data
+     * - Base64 encoded image data
+     * - Data Uri
      */
     'backgrounds' => [],
     /**
@@ -14,23 +20,34 @@ return [
      */
     'length' => 6,
     /**
-     * font
+     * font 
+     * - array random
+     * - string
+     * - null : Default Tahoma
      */
-    'font' => 'vendor/captcha/fonts/tahoma', //without .ttf
+    'font' => null,
     /**
      * colors
      */
     'colors' => [
-        [40,40,40], // Gray
-        [0,0,0], // Black
-        [237,41,57], // Red
-        [0,176,24], // Dark Green
-        [0,43,198], // Blue
+        "#111827", // Gray
+        "#000000", // Black
+        "#7f1d1d", // Red
+        "#14532d", // Dark Green
+        "#1e3a8a", // Blue
+        "#831843", // Pink
+        "#581c87", // Purple
     ],
-     /**
+    /**
      * size from resize
      */
-    'width' => 200,
-    'height' => 40,
-
+    'width' => 160,
+    'height' => 60,
+    /**
+     * hash_type
+     * - laravel
+     * - md5
+     * - sha256
+     */
+    'hash_type' => 'laravel',
 ];
