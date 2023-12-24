@@ -36,12 +36,12 @@ class CaptchaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'captcha');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->configureComponents();
         $langDir = 
         $this->publishes([
             __DIR__.'/../config/captcha.php' => config_path('captcha.php'),
             __DIR__.'/../resources/views' => resource_path('views/vendor/captcha'),
-            __DIR__.'/../resources/fonts' => public_path('vendor/captcha/fonts'),
             __DIR__.'/../lang' => is_dir(resource_path('lang')) ? resource_path('lang') : base_path('lang'),   
         ], 'captcha-laravel');
         $this->ExtendValidation();
@@ -56,6 +56,7 @@ class CaptchaServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
             $this->registerComponent('box');
+            $this->registerComponent('box-refresh');
         });
     }
 
