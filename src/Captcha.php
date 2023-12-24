@@ -18,11 +18,11 @@ class Captcha
      * @var array
      */
     protected $defaultBackgrounds = [
-        __DIR__ . "/backgrounds/1.png",
-        __DIR__ . "/backgrounds/2.png",
-        __DIR__ . "/backgrounds/3.png",
-        __DIR__ . "/backgrounds/4.png",
-        __DIR__ . "/backgrounds/5.png",
+        __DIR__ . "/Backgrounds/1.png",
+        __DIR__ . "/Backgrounds/2.png",
+        __DIR__ . "/Backgrounds/3.png",
+        __DIR__ . "/Backgrounds/4.png",
+        __DIR__ . "/Backgrounds/5.png",
     ];
 
     /**
