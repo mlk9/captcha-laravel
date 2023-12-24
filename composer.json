@@ -15,9 +15,22 @@
         }
     },
     "require": {
-        "php": ">=7.1.3",
+        "php": ">=7.4",
         "illuminate/support": "~6|~7|~8|~9|~10",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "intervention/image": "^3.1"
+    },
+    "require-dev" : {
+        "laravel/pint": "^1.13.6",
+        "phpstan/phpstan": "^1.10.47",
+        "symfony/var-dumper": "^6.4.0|^7.0.1",
+        "phpunit/phpunit": "^10.5",
+        "orchestra/testbench": "^8.18"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mlk9\\CaptchaPackage\\Tests\\": "tests/"
+        }
     },
     "extra": {
         "laravel": {
