@@ -5,7 +5,7 @@ image captcha for Laravel
 - works with session
 - generates image your custom
 
-Persian Docs :
+Persian Docs for V2 :
 <https://vrgl.ir/WQXCT>
 
 # Installation
@@ -26,6 +26,7 @@ php artisan vendor:publish --tag=captcha-laravel
 
 ## Configure
 
+- type (array , [char, math])
 - backgrounds (array)
 - char (string)
 - length (int)
@@ -83,6 +84,8 @@ if(!\Mlk9\Captcha\Facades\Captcha::isValid($request->captcha))
     return back()->withErrors('Wrong Captcha');
 }
 ```
+
 ## notice for v2
+
 if you get error for font you can replace in config
 `'font' => public_path('vendor/captcha/fonts/tahoma.ttf'),`
