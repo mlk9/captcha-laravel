@@ -2,7 +2,7 @@
     <div class="flex flex-wrap">
         <div class="flex-1 border-gray-400 border-2 p-2 rounded flex flex-wrap items-center max-w-fit">
             <img id="captcha-image" class="w-[160px] h-[60px] border-gray-400" src="{{ route('captcha.image') }}" alt="captha">
-            <button id="refresh-captcha"
+            <button id="refresh-captcha" type="button"
                 class="bg-gray-700 hover:bg-gray-900 transition-all text-white p-1 rounded-lg"><svg
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd"
