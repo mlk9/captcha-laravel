@@ -2,7 +2,13 @@
 
 return [
     /**
-     * add additional backgrounds : 
+     * type of captcha :
+     * - math
+     * - char
+     */
+    'type' => ['math', 'char'],
+    /**
+     * add additional backgrounds :
      * - Path in filesystem
      * - File Pointer resource
      * - SplFileInfo object
@@ -20,7 +26,7 @@ return [
      */
     'length' => 6,
     /**
-     * font 
+     * font
      * - array random
      * - string
      * - null : Default Tahoma

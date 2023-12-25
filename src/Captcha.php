@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+
 /**
  * Captcha class
  */
@@ -57,25 +58,27 @@ class Captcha
         $colors = config('captcha.colors', $this->defaultColors);
         /* get backgrounds */
         $backgorunds = count(config("captcha.backgrounds", $this->defaultBackgrounds)) === 0 ? $this->defaultBackgrounds : config("captcha.backgrounds", $this->defaultBackgrounds);
-        /* get char */
-        $captcha = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
-        /* select random */
-        $captcha = substr(str_shuffle($captcha), 0, $length);
-        /* put captcha to session hashed */
-        switch (config('captcha.hash_type', 'laravel')) {
-            case 'laravel':
-                Session::put('captcha-hex', Hash::make($captcha));
-                break;
-            case 'md5':
-                Session::put('captcha-hex', hash("md5", $captcha));
-                break;
-            case 'sha256':
-                Session::put('captcha-hex', hash("sha256", $captcha));
-                break;
-            default:
-                Session::put('captcha-hex', Hash::make($captcha));
-                break;
+        /* select reandom type captcha */
+        $typeCaptcha = config('captcha.type', ['math', 'char']);
+        $randomTypeCaptcha = rand(0, count($typeCaptcha) - 1);
+
+        if ($typeCaptcha[$randomTypeCaptcha] === "math") {
+            $action = ['+', '-', '×'];
+            $partA = rand(1, 50);
+            $partB = array_rand($action);
+            $partC = rand(51, 99);
+            $captcha = $partA . ' ' . $action[$partB] . ' ' . $partC;
         }
+
+        if ($typeCaptcha[$randomTypeCaptcha] === "char") {
+            /* get char */
+            $captcha = config('captcha.char', '1234567890abcdefghijklmnopqrstuvwxyz');
+            /* select random */
+            $captcha = substr(str_shuffle($captcha), 0, $length);
+
+            $this->setHashSession($captcha);
+        }
+
         // create image manager with desired driver
         $manager = new ImageManager(new Driver());
         // read image from file system
@@ -100,7 +103,32 @@ class Captcha
         $image->place(Arr::random($backgorunds));
 
         $image->resize(config('captcha.width', 160), config('captcha.height', 60));
-        // save modified image in new format
+
+        if ($typeCaptcha[$randomTypeCaptcha] === "math") {
+            switch ($action[$partB]) {
+                case '+':
+                    $this->setHashSession(($partA + $partC));
+                    $resultCaptcha = $partA + $partC;
+                    break;
+                case '-':
+                    $this->setHashSession(($partC - $partA));
+                    $resultCaptcha = $partC - $partA;
+                    break;
+                case '×':
+                    $this->setHashSession(($partA * $partC));
+                    $resultCaptcha = $partA * $partC;
+                    break;
+                default:
+                    $this->setHashSession(($partA + $partC));
+                    $resultCaptcha = $partA + $partC;
+                    break;
+            }
+
+            return (object) [
+                'code' => $resultCaptcha,
+                'image' => $image->toPng()->toDataUri(),
+            ];
+        }
         return (object) [
             'code' => $captcha,
             'image' => $image->toPng()->toDataUri(),
@@ -138,5 +166,30 @@ class Captcha
         }
 
         return $condition;
+    }
+
+    /**
+     * set captcha by type in session
+     *
+     * @param string $captcha
+     * @return void
+     */
+    private function setHashSession(string $captcha): void
+    {
+        /* put captcha to session hashed */
+        switch (config('captcha.hash_type', 'laravel')) {
+            case 'laravel':
+                Session::put('captcha-hex', Hash::make($captcha));
+                break;
+            case 'md5':
+                Session::put('captcha-hex', hash("md5", $captcha));
+                break;
+            case 'sha256':
+                Session::put('captcha-hex', hash("sha256", $captcha));
+                break;
+            default:
+                Session::put('captcha-hex', Hash::make($captcha));
+                break;
+        }
     }
 }
